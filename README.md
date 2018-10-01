@@ -46,7 +46,7 @@ By providing your legal first and last names, street address, city, zip code, da
 
 The Entry Form and Technical Submission together are considered the entry (“Entry”). An Entry is not complete and will not be considered if either portion is missing. 
 
-### ENTRY FORM REQUIREMENTS
+### Entry Form Requirements
 An Entry may be submitted by a team of individuals working collaboratively (a “Team Contestant”), in which case, each individual member of the team must complete the Entry Form as described above and all members of the Team Contestant must designate the same point of contact to receive official Challenge correspondence.
 
 1. Contact Information 
