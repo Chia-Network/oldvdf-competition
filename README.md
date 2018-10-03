@@ -1,35 +1,8 @@
-This is an in-development version of the Chia Network proof-of-time verifiable delay function "inkfish".
+# Chia VDF competition and implementation
 
-An optional install is `gmpy2` to potentially speed up primality testing.
+In an attempt to create a secure, open and decentralized consensus algorithm, Chia is hosting a 3 month long competition, for the implementation of fast and secure verifiable delay functions.
 
-On a Mac, run
-
-    $ brew install gmp libmpc
-
-
-Set up your virtual environments:
-
-    $ python3 -m venv env
-    $ ln -s env/bin/activate
-    $ . ./activate
-    $ pip install -e .
-
-Check out the command-line tools:
-
-    $ pot -h
-
-Generate a proof of time.
-
-    $ pot deadbeef 1000
-
-Generate a small proof of time.
-
-    $ pot -s deadbeef 1000
-
-Verify a proof of time.
-
-    $ pot deadbeef 1000 <proof>
-
+This is an in-development version of the Chia Network proof-of-time verifiable delay function "inkfish". Below, you can also find a summary of the rules, a link to the rules and disclosures, relevant  research papers.
 
 The verifiable delay function used is the iterated squarings / RSA timelock construction. The code implements both RSA and classgroup settings for this.
 
@@ -77,3 +50,38 @@ An Entry may be submitted by a team of individuals working collaboratively (a â€
 ---
 Want to learn more? Join [Chia's public Keybase group](https://keybase.io/team/chia_network.public) or read Chia's [reddit](https://www.reddit.com/r/chia_vdf).
 
+## VDF Python implementation
+
+An optional install is `gmpy2` to potentially speed up primality testing.
+
+On a Mac, run
+
+    $ brew install gmp libmpc
+
+
+Set up your virtual environments:
+
+    $ python3 -m venv env
+    $ ln -s env/bin/activate
+    $ . ./activate
+    $ pip install -e .
+
+Check out the command-line tools:
+
+    $ pot -h
+
+Generate a proof of time.
+
+    $ pot deadbeef 1000
+
+Generate a small proof of time.
+
+    $ pot -s deadbeef 1000
+
+Verify a proof of time.
+
+    $ pot deadbeef 1000 <proof>
+
+To see some benchmarks, run
+
+    $ python3 tests/test_classgroup_vdf.py
