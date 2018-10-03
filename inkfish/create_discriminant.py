@@ -29,7 +29,7 @@ def create_discriminant(seed, length=2048):
     Return -p.
     """
     entropy = entropy_from_seed(seed, (length >> 3) + 2)
-    n = int.from_bytes(entropy[:-2], 'big') | (1 << (length - 1)) | 7
+    n = (int.from_bytes(entropy[:-2], 'big') >> ((len(entropy) - 2) * 8 - length)) | (1 << (length - 1))
     n -= n % m
     n += residues[int.from_bytes(entropy[-2:], 'big') % len(residues)]
 
