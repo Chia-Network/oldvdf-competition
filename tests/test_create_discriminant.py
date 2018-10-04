@@ -24,7 +24,7 @@ class test_generate_prime(unittest.TestCase):
             "b039f8e744a99322afef1de7df4dc7165c464a989e103ec27888ca883095bcffe9f6f4"
             "88d790488b98e2d7ccbeb081de5dd3a26be509cf58d632861671195e7daf29ebf81a13"
             "59a66f22c7a9ecd96a693889177be471298d33bb031d0643b591611ac4b20c12858c35"
-            "1fa8d29057c8cca877f70e07", 16
+            "1fa8d29057c8cca878c449d7", 16
         )
         v = create_discriminant(b"foo", 2048)
         self.assertEqual(v, prime_foo)
@@ -38,7 +38,7 @@ class test_generate_prime(unittest.TestCase):
             "f6e30fa8e3b3d88a03364a9c403e0609e74f15888d9d91ec9aef5bd2bcab90063eb0d6"
             "001e61a0c374c8d2626ffab951048573ea15da531c4dacf2218139715414cf5828dd10"
             "1b23c01fbafffde1f109780d123673f8b23e41495fa8bbb5b36f39f8d9693835036445"
-            "075fbb770554a352ec32c757", 16
+            "075fbb770554a352f0dc91d7", 16
         )
         v = create_discriminant(b"bar", 2048)
         self.assertEqual(v, prime_bar)
