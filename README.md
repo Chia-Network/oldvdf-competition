@@ -24,14 +24,7 @@ The Entry Form and Technical Submission together are considered the entry (“En
 ### Entry Form Requirements
 An Entry may be submitted by a team of individuals working collaboratively (a “Team Contestant”), in which case, each individual member of the team must complete the Entry Form as described above and all members of the Team Contestant must designate the same point of contact to receive official Challenge correspondence.
 
-1. Contact Information
-- First Name(s):
-- Last Name(s):
-- Street Address(es):
-- City(ies)
-- Zip Code(s):
-- Phone number(s):
-- Email address(es):
+1. Completed version of the [Entry Form](https://www.dropbox.com/s/odsglm1eu9z6g8v/CHIA%20NETWORK%20APPLICATION%20FORM%204812-8893-1439%20v.1.pdf?dl=0).
 
 2. Signed version of the [VDF Contest Challenge Rules and Disclosures](https://www.dropbox.com/s/8s15pcumqm8p7fs/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%282%29.pdf?dl=0)
 
