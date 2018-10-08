@@ -53,8 +53,8 @@ def calculate_final_T(T, delta):
     return Ts[-delta]  # return the correct T to look for
 
 
-def generate_large_proof(x, T, delta, y, powers, reduce_f, identity,
-                         generate_r_value, int_size_bits):
+def generate_proof(x, T, delta, y, powers, reduce_f, identity,
+                   generate_r_value, int_size_bits):
     """
     Generate the proof.
     Returns a list of elements derived by operations on x.
@@ -142,8 +142,8 @@ def generate_large_proof(x, T, delta, y, powers, reduce_f, identity,
     return mus
 
 
-def verify_large_proof(x_initial, y_initial, proof, T, delta, reduce_f,
-                       generate_r_value, int_size_bits):
+def verify_proof(x_initial, y_initial, proof, T, delta, reduce_f,
+                 generate_r_value, int_size_bits):
     # Only even values work, since we need to do T/2
     if T % 2 != 0:
         raise ValueError("T must be even")
