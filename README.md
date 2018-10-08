@@ -17,28 +17,21 @@ We have an explanation of class groups and binary quadratic forms [here](https:/
 ---
 ## ENTRY FORM
 
-By providing your legal first and last names, street address, city, zip code, daytime and home phone number, email address, and agreement to the [VDF Contest Challenge Rules and Disclosures](https://www.dropbox.com/s/8s15pcumqm8p7fs/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%282%29.pdf?dl=0), and  along with the source code and documentation meeting the Entry Specifications described in the VDF Contest Challenge Rules and Disclosures agreement above (specifically the “Technical Submission”) to [Chia's public Keybase group](https://keybase.io/team/chia_network.public). The judges will communicate with your team using a keybase shared git repo.
+By providing your legal first and last names, street address, city, zip code, daytime and home phone number, email address, and agreement to the [VDF Contest Challenge Rules and Disclosures agreement](https://www.dropbox.com/s/46b92qfvrxw8jzp/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%284%29.pdf?dl=0), and  along with the source code and documentation meeting the Entry Specifications described in the VDF Contest Challenge Rules and Disclosures agreement above (specifically the “Technical Submission”) to [Chia's public Keybase group](https://keybase.io/team/chia_network.public). The judges will communicate with your team using a keybase shared git repo.
 
 The Entry Form and Technical Submission together are considered the entry (“Entry”). An Entry is not complete and will not be considered if either portion is missing.
 
 ### Entry Form Requirements
 An Entry may be submitted by a team of individuals working collaboratively (a “Team Contestant”), in which case, each individual member of the team must complete the Entry Form as described above and all members of the Team Contestant must designate the same point of contact to receive official Challenge correspondence.
 
-1. Contact Information
-- First Name(s):
-- Last Name(s):
-- Street Address(es):
-- City(ies)
-- Zip Code(s):
-- Phone number(s):
-- Email address(es):
+1. Completed version of the [Entry Form](https://www.dropbox.com/s/odsglm1eu9z6g8v/CHIA%20NETWORK%20APPLICATION%20FORM%204812-8893-1439%20v.1.pdf?dl=0).
 
-2. Signed version of the [VDF Contest Challenge Rules and Disclosures](https://www.dropbox.com/s/8s15pcumqm8p7fs/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%282%29.pdf?dl=0)
+2. Signed version of the [VDF Contest Challenge Rules and Disclosures agreement](https://www.dropbox.com/s/46b92qfvrxw8jzp/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%284%29.pdf?dl=0)
 
-3. Source code and documentation meeting the Entry Specifications described in the [VDF Contest Challenge Rules and Disclosures](https://www.dropbox.com/s/8s15pcumqm8p7fs/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%282%29.pdf?dl=0) agreement specific to the “Technical Submission” guidelines (outlined below).
+3. Source code and documentation meeting the Entry Specifications described in the [VDF Contest Challenge Rules and Disclosures agreement](https://www.dropbox.com/s/46b92qfvrxw8jzp/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%284%29.pdf?dl=0) specific to the “Technical Submission” guidelines (outlined below).
 
 ### Technical Specifications
-1. All source code and documentation in an Entry must be made and submitted pursuant to the terms of the Apache or MIT License. The Apache Licence and instructions for applying it can be found here: https://www.apache.org/licenses/LICENSE-2.0. The MIT License and instructions for applying it can be found here: https://opensource.org/licenses/MIT.
+1. All source code and documentation in an Entry must be made and submitted pursuant to the terms of the Apache or MIT License. The Apache Licence and instructions for applying it can be found [here](https://www.apache.org/licenses/LICENSE-2.0). The MIT License and instructions for applying it can be found [here](https://opensource.org/licenses/MIT).
 
 2. In the Fastest VDF Implementation category, code must be produced that will solve a VDF at a given number of iterations and security difficulty on the reference hardware. The [repeated squarings VDF](https://eprint.iacr.org/2018/623.pdf) should be used, but we do not require computation of a proof, and only the speed of computation of the output will be judged. The VDF should be computed in the class group setting, and should output the same as our sample code above (see classgroup.py for naive implementation of class groups). The number of iterations and security difficulty will be provided at least 2 months before the end of the contest, and will be announced on the reddit and the keybase channel.
 

@@ -10,11 +10,9 @@ def approximate_parameters(T):
     performed, and how much memory should be used.
     """
     log_memory = math.log(10000000, 2)
-
-    # For low number of iterations, we can just set L to 1 and we will
-    # have enough memory. For high Ts, we can limit memory usage
+    log_T = math.log(T, 2)
     L = 1
-    if (math.log(T, 2) - log_memory > 0):
+    if (log_T - log_memory > 0):
         L = math.ceil(pow(2, log_memory - 20))
 
     # Total time for proof: T/k + L * 2^(k+1)
