@@ -15,6 +15,7 @@ Both approaches are summarized in [this survey paper](https://eprint.iacr.org/20
 We have an explanation of class groups and binary quadratic forms [here](https://www.dropbox.com/s/aqupbohwj08s1q3/bqf%20%281%29.pdf?dl=0).
 
 Want to learn more? Join [Chia's public Keybase group](https://keybase.io/team/chia_network.public) or read Chia's [reddit](https://www.reddit.com/r/chia_vdf).
+
 ---
 ## ENTRY FORM
 
