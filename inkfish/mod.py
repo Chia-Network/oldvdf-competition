@@ -113,6 +113,21 @@ def square_root_mod_p_list(a, prime_factors):
         yield crt(a_list, prime_factors)
 
 
+def solve_mod(a, b, m):
+    """
+    Solve ax == b mod m for x.
+
+    Return s, t where x = s + k * t for integer k yields all solutions.
+    """
+    g, d, e = extended_gcd(a, m)
+    q, r = divmod(b, g)
+    if r != 0:
+        raise ValueError("no solution to %dx = %d mod %d" % (a, b, m))
+
+    assert b == q * g
+    return (q * d) % m, m // g
+
+
 """
 Copyright 2018 Chia Network Inc
 

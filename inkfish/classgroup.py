@@ -96,60 +96,91 @@ class ClassGroup(tuple):
 
     def multiply(self, other):
         """
-        An implementation of form composition as documented by Wikipedia.
-
-        https://en.wikipedia.org/wiki/Binary_quadratic_form#Composition
+        An implementation of form composition as documented by "Explaining composition".
         """
-
         a1, b1, c1 = self.reduced()
         a2, b2, c2 = other.reduced()
 
-        discriminant = self.discriminant()
+        g = (b2 + b1) // 2
+        h = (b2 - b1) // 2
 
-        b_mu = (b1 + b2) // 2
-        e = mod.gcd(a1, a2, b_mu)
-        a3 = (a1 * a2) // (e * e)
+        w = mod.gcd(a1, a2, g)
 
-        u3 = b_mu // e
-        v3 = (discriminant + b1 * b2) // (2 * e)
-        w3 = 2 * a3
-        gcd = mod.gcd(u3, v3, w3)
-        u3, v3, w3 = u3 // gcd, v3 // gcd, w3 // gcd
-        i3 = mod.inverse(u3, w3)
-        v3 *= i3
+        j = w
+        r = 0
+        s = a1 // w
+        t = a2 // w
+        u = g // w
 
-        a_list = [b1, b2, v3]
-        m_list = [2 * a1 // e, 2 * a2 // e, w3]
+        # solve these equations for k, l, m
+        """
+        k * t - l * s = h
+        k * u - m * s = c2
+        l * u - m * t = c1
+        """
 
-        b3 = mod.crt(a_list, m_list)
-        c3 = (b3 * b3 - discriminant) // (4 * a3)
+        """
+        solve
+        (tu)k - (hu + sc) = 0 mod st
+        k = (- hu - sc) * (tu)^-1
+        """
+
+        k_temp, constant_factor = mod.solve_mod(t * u, h * u + s * c1, s * t)
+        n, constant_factor_2 = mod.solve_mod(t * constant_factor, h - t * k_temp, s)
+        k = k_temp + constant_factor * n
+        l = (t * k - h) // s
+        m = (t * u * k - h * u - s * c1) // (s * t)
+        #assert m * s * t == t * u * k - h * u - s * c1
+        #assert u * l == t * m + c1
+        #assert (t * u * k - h * u - s * c1) % (s * t) == 0
+
+        a3 = s * t - r * u
+        b3 = (j * u + m * r) - (k * t + l * s)
+        c3 = k * l - j * m
         return self.__class__(a3, b3, c3).reduced()
 
     def square(self):
         """
-        A rewrite of multiply for squaring
+        A rewrite of multiply for squaring.
         """
-
         a1, b1, c1 = self.reduced()
 
-        discriminant = self.discriminant()
+        g = b1
+        h = 0
 
-        e = mod.gcd(a1, b1)
-        a3 = (a1 * a1) // (e * e)
+        w = mod.gcd(a1, g)
 
-        u3 = b1 // e
-        v3 = (discriminant + b1 * b1) // (2 * e)
-        w3 = 2 * a3
-        gcd = mod.gcd(u3, v3, w3)
-        u3, v3, w3 = u3 // gcd, v3 // gcd, w3 // gcd
-        i3 = mod.inverse(u3, w3)
-        v3 *= i3
+        j = w
+        r = 0
+        s = a1 // w
+        t = s
+        u = g // w
 
-        a_list = [b1, v3]
-        m_list = [2 * a1 // e, w3]
+        # solve these equations for k, l, m
+        """
+        k * t - l * s = h
+        k * u - m * s = c2
+        l * u - m * t = c1
+        """
 
-        b3 = mod.crt(a_list, m_list)
-        c3 = (b3 * b3 - discriminant) // (4 * a3)
+        """
+        solve
+        (tu)k - (hu + sc) = 0 mod st
+        k = (- hu - sc) * (tu)^-1
+        """
+
+        k_temp, constant_factor = mod.solve_mod(t * u, h * u + s * c1, s * t)
+        n, constant_factor_2 = mod.solve_mod(t * constant_factor, h - t * k_temp, s)
+        k = k_temp + constant_factor * n
+        m = (t * u * k - h * u - s * c1) // (s * t)
+        assert m * s * t == t * u * k - h * u - s * c1
+        l = (t * m + c1) // u
+        assert u * l == t * m + c1
+        assert (t * u * k - h * u - s * c1) % (s * t) == 0
+
+        a3 = s * t - r * u
+        b3 = (j * u + m * r) - (k * t + l * s)
+        c3 = k * l - j * m
         return self.__class__(a3, b3, c3).reduced()
 
 
