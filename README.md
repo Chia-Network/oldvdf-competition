@@ -23,7 +23,7 @@ Enter by providing your legal first and last names, street address, city, zipcod
 
 An Entry may be submitted by a team of individuals working collaboratively (a “Team Contestant”), in which case, each individual member of the team must complete the Entry Form as described above and all members of the Team Contestant must designate the same point of contact to receive official Competition correspondence.
 
-### Entry Form Requirements
+### Entry Requirements
 
 1. Completed version of the [Entry Form](https://www.dropbox.com/s/odsglm1eu9z6g8v/CHIA%20NETWORK%20APPLICATION%20FORM%204812-8893-1439%20v.1.pdf?dl=0).
 
