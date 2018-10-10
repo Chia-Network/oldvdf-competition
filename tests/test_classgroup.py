@@ -5,6 +5,18 @@ from inkfish.classgroup import ClassGroup
 
 class test_ClassGroup(unittest.TestCase):
 
+    def test_new_failure(self):
+        t2_1_6 = ClassGroup(2, 1, 6)
+        t4_1_3 = ClassGroup(4, 1, 3)
+        p = t2_1_6 * t4_1_3
+        self.assertEqual(p, (3, 1, 4))
+
+    def test_new_failure1(self):
+        t6_5_7 = ClassGroup(6, 5, 7)
+        t2_1_18 = ClassGroup(2, 1, 18)
+        p = t6_5_7 * t2_1_18
+        self.assertEqual(p, (4, -1, 9))
+
     def test_paper_check(self):
         t12_11_3 = ClassGroup(12, 11, 3)
         t93_109_32 = ClassGroup(93, 109, 32)

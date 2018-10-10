@@ -76,6 +76,24 @@ class test_ModArithmetic(unittest.TestCase):
                             print(a, prod, t, t*t % prod)
                             self.assertEqual(t * t % prod, a)
 
+    def test_solve_mod(self):
+
+        def check(a, b, c):
+            r, s = mod.solve_mod(a, b, c)
+            b %= c
+            for k in range(50):
+                a_coefficient = r + s * k
+                self.assertEqual((a_coefficient * a) % c, b)
+
+        check(3, 4, 5)
+        check(6, 8, 10)
+        check(12, 30, 7)
+        check(6, 15, 411)
+        check(192, 193, 863)
+        check(-565721958, 740, 4486780496)
+        check(565721958, 740, 4486780496)
+        check(-565721958, -740, 4486780496)
+        check(565721958, -740, 4486780496)
 
 """
 Copyright 2018 Chia Network Inc
