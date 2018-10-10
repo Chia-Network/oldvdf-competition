@@ -4,7 +4,7 @@ In an attempt to create a secure, fast, open, decentralized consensus algorithm,
 
 This repository contains an in-development version of the Chia Network proof-of-time verifiable delay function "inkfish".  The verifiable delay function used is the iterated squarings / RSA timelock construction. The code implements both RSA and classgroup settings for this.
 
-Furthermore, there are two proof approaches implemented here:
+Two proof approaches are implemented here:
 1. The [first one](https://eprint.iacr.org/2018/627.pdf) by Krzysztof Pietrzak, which is fast to create but large and slow to verify.
 2. The [second one](https://eprint.iacr.org/2018/623.pdf) by Benjamin Wesolowski which (though parallelizable) is slower to create but small and quick to verify.
 
