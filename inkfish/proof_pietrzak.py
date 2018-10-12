@@ -53,7 +53,7 @@ def calculate_final_T(T, delta):
     return Ts[-delta]  # return the correct T to look for
 
 
-def generate_proof(x, T, delta, y, powers, reduce_f, identity,
+def generate_proof(x, T, delta, y, powers, identity,
                    generate_r_value, int_size_bits):
     """
     Generate the proof.
@@ -116,7 +116,7 @@ def generate_proof(x, T, delta, y, powers, reduce_f, identity,
 
                 mu_component = powers[T_sum]
 
-                mu = reduce_f(mu * pow(mu_component, r_prod))
+                mu = mu * pow(mu_component, r_prod)
             mus.append(mu)
         else:
             # Compute for rounds i + 1 until the end, for low cache storage
@@ -127,8 +127,8 @@ def generate_proof(x, T, delta, y, powers, reduce_f, identity,
             mus.append(mu)
 
         rs.append(generate_r_value(x, y, mus[-1], int_size_bits))
-        x_p.append(reduce_f(pow(x_p[-1], rs[-1]) * mu))
-        y_p.append(reduce_f(pow(mu, rs[-1]) * y_p[-1]))
+        x_p.append(pow(x_p[-1], rs[-1]) * mu)
+        y_p.append(pow(mu, rs[-1]) * y_p[-1])
 
         # Compute the new T, and y. If T is odd, make it even, and adjust
         # the y_p accordingly, so that y_p = x_p ^ (2 ^ curr_T)
@@ -142,7 +142,7 @@ def generate_proof(x, T, delta, y, powers, reduce_f, identity,
     return mus
 
 
-def verify_proof(x_initial, y_initial, proof, T, delta, reduce_f,
+def verify_proof(x_initial, y_initial, proof, T, delta,
                  generate_r_value, int_size_bits):
     # Only even values work, since we need to do T/2
     if T % 2 != 0:
@@ -156,8 +156,8 @@ def verify_proof(x_initial, y_initial, proof, T, delta, reduce_f,
     for mu in proof:
         assert(curr_T & 1 == 0)
         r = generate_r_value(x_initial, y_initial, mu, int_size_bits)
-        x = reduce_f(pow(x, r) * mu)
-        y = reduce_f(pow(mu, r) * y)
+        x = pow(x, r) * mu
+        y = pow(mu, r) * y
 
         # To guarantee even Ts, add 1 if necessary
         curr_T >>= 1

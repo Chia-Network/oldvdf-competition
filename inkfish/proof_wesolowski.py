@@ -21,7 +21,9 @@ def approximate_parameters(T):
     # W can be approximated by log(x) - log(log(x)) + 0.25
     intermediate = T * math.log(2) / (2 * L)
     k = max([round(math.log(intermediate) - math.log(math.log(intermediate)) + 0.25), 1])
-    w = math.ceil(T / (T/k + L * pow(2, k+1)))
+
+    # 1/w is the approximate proportion of time spent on the proof
+    w = math.floor(T / (T/k + L * pow(2, k+1))) - 2
 
     return (L, k, w)
 

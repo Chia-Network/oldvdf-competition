@@ -42,7 +42,7 @@ def exercise_code_verbosely(group_functions):
     print("")
     print("Starting to compute the large proof...")
     start_t = time.time() * 1000
-    proof = proof_pietrzak.generate_proof(x, T, delta, y, powers, lambda a: a, identity,
+    proof = proof_pietrzak.generate_proof(x, T, delta, y, powers, identity,
                                           generate_r_value, int_size_bits)
     print("Finished computing large proof in", round(((time.time() * 1000)
                                                      - start_t), 2), "ms")
@@ -61,7 +61,7 @@ def exercise_code_verbosely(group_functions):
     print("")
     print("Starting to verify the large proof...")
     start_t = time.time() * 1000
-    ok = proof_pietrzak.verify_proof(x, y, proof, T, delta, lambda a: a,
+    ok = proof_pietrzak.verify_proof(x, y, proof, T, delta,
                                      generate_r_value, int_size_bits)
     assert ok
     print("Finished verifying large proof in", round(((time.time() * 1000)

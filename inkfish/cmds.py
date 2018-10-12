@@ -46,20 +46,20 @@ def pot(args=sys.argv):
         print("discriminant: %s" % discriminant)
         print("discriminant size: %s" % args.length)
 
-    generator = ClassGroup.from_ab_discriminant(2, 1, discriminant)
+    x = ClassGroup.from_ab_discriminant(2, 1, discriminant)
     if args.verbose:
-        print("generator: %s" % str(generator))
+        print("x: %s" % str(x))
 
     if args.proof:
         if args.type == "wesolowski":
             ok = check_proof_of_time_wesolowski(
-                discriminant, generator, args.proof, args.iterations, args.length)
+                discriminant, x, args.proof, args.iterations, args.length)
         elif args.type == "n-wesolowski":
             ok = check_proof_of_time_nwesolowski(
-                discriminant, generator, args.proof, args.iterations, args.length)
+                discriminant, x, args.proof, args.iterations, args.length)
         elif args.type == "pietrzak":
             ok = check_proof_of_time_pietrzak(
-                discriminant, generator, args.proof, args.iterations, args.length)
+                discriminant, x, args.proof, args.iterations, args.length)
         else:
             print("Invalid type, use wesolowski, n-wesolowski, or pietrzak")
             return -1
@@ -72,19 +72,18 @@ def pot(args=sys.argv):
         start_t = time.time() * 1000
         if args.type == "wesolowski":
             result, proof = create_proof_of_time_wesolowski(
-                discriminant, generator, args.iterations, args.length)
+                discriminant, x, args.iterations, args.length)
         elif args.type == "n-wesolowski":
             result, proof = create_proof_of_time_nwesolowski(
-                discriminant, generator, args.iterations, args.length, args.depth, 0)
+                discriminant, x, args.iterations, args.length, args.depth, 0)
         elif args.type == "pietrzak":
             result, proof = create_proof_of_time_pietrzak(
-                discriminant, generator, args.iterations, args.length)
+                discriminant, x, args.iterations, args.length)
         else:
             print("Invalid type, use wesolowski, n-wesolowski, or pietrzak")
             return -1
         if args.verbose:
             print("Finished in ", round(((time.time() * 1000) - start_t), 2), "ms")
-
         hex_result = binascii.hexlify(result).decode("utf8")
         hex_proof = binascii.hexlify(proof).decode("utf8")
         print(hex_result + hex_proof)

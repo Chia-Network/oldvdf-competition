@@ -94,8 +94,7 @@ def create_proof_of_time_pietrzak(discriminant, x, iterations, int_size_bits):
     powers = iterate_squarings(x, powers_to_calculate)
     y = powers[iterations]
     proof = proof_pietrzak.generate_proof(x, iterations, delta, y, powers,
-                                          lambda a: a.reduced(), x.identity(),
-                                          generate_r_value, int_size_bits)
+                                          x.identity(), generate_r_value, int_size_bits)
 
     return y.serialize(), serialize_proof(proof)
 
@@ -168,8 +167,7 @@ def check_proof_of_time_pietrzak(discriminant, x, proof_blob, iterations, int_si
     y = ClassGroup.from_bytes(result_bytes, discriminant)
     try:
         return proof_pietrzak.verify_proof(x, y, proof, iterations, 8,
-                                           lambda a: a.reduced(), generate_r_value,
-                                           int_size_bits)
+                                           generate_r_value, int_size_bits)
     except Exception:
         return False
 
