@@ -14,8 +14,18 @@ def approximate_parameters(T):
     L = 1
     if (log_T - log_memory > 0):
         L = math.ceil(pow(2, log_memory - 20))
-    k = round(math.log(T / (10 * L), 2))
-    return (L, k)
+
+    # Total time for proof: T/k + L * 2^(k+1)
+    # To optimize, set left equal to right, and solve for k
+    # k = W(T * log(2) / (2 * L))  / log(2), where W is the product log function
+    # W can be approximated by log(x) - log(log(x)) + 0.25
+    intermediate = T * math.log(2) / (2 * L)
+    k = max([round(math.log(intermediate) - math.log(math.log(intermediate)) + 0.25), 1])
+
+    # 1/w is the approximate proportion of time spent on the proof
+    w = math.floor(T / (T/k + L * pow(2, k+1))) - 2
+
+    return (L, k, w)
 
 
 def hash_prime(s):
@@ -74,15 +84,22 @@ def eval_optimized(identity, h, B, T, k, l, C):
     return x
 
 
-def generate_small_proof(identity, x, y, T, k, l, C):
+def generate_proof(identity, x, y, T, k, l, C, send_conn=None):
     """
     Proof construction from Wesolowski paper
     """
     B = hash_prime(x.serialize() + y.serialize())
-    return eval_optimized(identity, x, B, T, k, l, C)
+    proof = eval_optimized(identity, x, B, T, k, l, C)
+    # Return proof through a connection, for multiprocessing. This is
+    # useful for n-wesolowski, where we need to prove in a different
+    # thread than the VDF thread.
+    if send_conn is not None:
+        send_conn.send_bytes(proof.serialize())
+
+    return proof
 
 
-def verify_small_proof(x, y, proof, T):
+def verify_proof(x, y, proof, T):
     """
     Verification from Wesolowski paper
     """

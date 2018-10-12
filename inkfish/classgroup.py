@@ -173,10 +173,10 @@ class ClassGroup(tuple):
         n, constant_factor_2 = mod.solve_mod(t * constant_factor, h - t * k_temp, s)
         k = k_temp + constant_factor * n
         m = (t * u * k - h * u - s * c1) // (s * t)
-        assert m * s * t == t * u * k - h * u - s * c1
+        # assert m * s * t == t * u * k - h * u - s * c1
         l = (t * m + c1) // u
-        assert u * l == t * m + c1
-        assert (t * u * k - h * u - s * c1) % (s * t) == 0
+        # assert u * l == t * m + c1
+        # assert (t * u * k - h * u - s * c1) % (s * t) == 0
 
         a3 = s * t - r * u
         b3 = (j * u + m * r) - (k * t + l * s)

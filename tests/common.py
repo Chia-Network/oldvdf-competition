@@ -2,17 +2,15 @@ import time
 import math
 
 from inkfish.iterate_squarings import iterate_squarings
-from inkfish.large_proof import (cache_indeces_for_count, generate_large_proof,
-                                 verify_large_proof)
-from inkfish.small_proof import (generate_small_proof, verify_small_proof,
-                                 approximate_parameters)
+from inkfish import proof_wesolowski
+from inkfish import proof_pietrzak
 from inkfish.proof_of_time import generate_r_value
 
 
 def exercise_code_verbosely(group_functions):
     # Perform T squarings, can be any even number
     # T = 500k approx= 2 ** 19
-    T = 20000
+    T = 10000
 
     # This denotes the number of rounds to skip, at the end. This
     # reduces proof size, but setting it too large, will slow down
@@ -20,14 +18,14 @@ def exercise_code_verbosely(group_functions):
     delta = 8
 
     # T = k * l * 2^k
-    L, k = approximate_parameters(T)
-    print("Using L: ", L, " and k: ", k)
+    L, k, w = proof_wesolowski.approximate_parameters(T)
+    print("Using L: ", L, " k: ", k, " and w:", w)
 
     x, identity, element_size_bytes, int_size_bits = group_functions()
 
     print("Starting to compute the VDF...")
     start_t = time.time() * 1000
-    powers_to_calculate = cache_indeces_for_count(T)
+    powers_to_calculate = proof_pietrzak.cache_indeces_for_count(T)
     powers_to_calculate_small = [i * k * L for i in range(0, math.ceil(T/(k*L)) + 1)]
     powers_to_calculate += powers_to_calculate_small
     powers_raw = iterate_squarings(x, powers_to_calculate)
@@ -44,8 +42,8 @@ def exercise_code_verbosely(group_functions):
     print("")
     print("Starting to compute the large proof...")
     start_t = time.time() * 1000
-    proof = generate_large_proof(x, T, delta, y, powers, lambda a: a, identity,
-                                 generate_r_value, int_size_bits)
+    proof = proof_pietrzak.generate_proof(x, T, delta, y, powers, identity,
+                                          generate_r_value, int_size_bits)
     print("Finished computing large proof in", round(((time.time() * 1000)
                                                      - start_t), 2), "ms")
     print("Proof size: %.2f KB" % (len(proof) * element_size_bytes / 1024.0))
@@ -54,7 +52,7 @@ def exercise_code_verbosely(group_functions):
     print("")
     print("Starting to compute the small proof...")
     start_t = time.time() * 1000
-    small_proof = generate_small_proof(identity, x, y, T, k, L, powers_small)
+    small_proof = proof_wesolowski.generate_proof(identity, x, y, T, k, L, powers_small)
     print("Proof size: %.2f KB" % (element_size_bytes / 1024.0))
     print("Finished computing small proof in", round(((time.time() * 1000)
                                                      - start_t), 2), "ms")
@@ -63,8 +61,8 @@ def exercise_code_verbosely(group_functions):
     print("")
     print("Starting to verify the large proof...")
     start_t = time.time() * 1000
-    ok = verify_large_proof(x, y, proof, T, delta, lambda a: a,
-                            generate_r_value, int_size_bits)
+    ok = proof_pietrzak.verify_proof(x, y, proof, T, delta,
+                                     generate_r_value, int_size_bits)
     assert ok
     print("Finished verifying large proof in", round(((time.time() * 1000)
                                                       - start_t), 2), "ms")
@@ -72,7 +70,7 @@ def exercise_code_verbosely(group_functions):
     print("")
     print("Starting to verify the small proof...")
     start_t = time.time() * 1000
-    ok2 = verify_small_proof(x, y, small_proof, T)
+    ok2 = proof_wesolowski.verify_proof(x, y, small_proof, T)
     assert(ok2)
     print("Finished verifying small proof in", round(((time.time() * 1000)
                                                      - start_t), 2), "ms")

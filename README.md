@@ -1,10 +1,10 @@
 # Chia VDF competition and implementation
 
-In an attempt to create a secure, open and decentralized consensus algorithm, Chia is hosting a 3 month long competition, for the implementation of fast and secure verifiable delay functions.
+In an attempt to create a secure, open and decentralized consensus algorithm, Chia is hosting a 3 month long competition, with a total of around $100,000 in prizes, for the implementation of fast and secure verifiable delay functions using class groups.
 
 This is an in-development version of the Chia Network proof-of-time verifiable delay function "inkfish". Below, you can also find a summary of the rules, a link to the rules and disclosures, relevant  research papers.
 
-The verifiable delay function used is the iterated squarings / RSA timelock construction. The code implements both RSA and classgroup settings for this.
+The verifiable delay function used is the iterated squarings / RSA timelock construction. The code implements this verifiable delay function using class groups.
 
 Furthermore, there are two proof approaches implemented here
 1. The [first one](https://eprint.iacr.org/2018/627.pdf) by Krzysztof Pietrzak, that is fast to create, but large and slow to verify.
@@ -35,7 +35,7 @@ An Entry may be submitted by a team of individuals working collaboratively (a â€
 ### Technical Specifications
 1. All source code and documentation in an Entry must be made and submitted pursuant to the terms of the Apache or MIT License. The Apache Licence and instructions for applying it can be found [here](https://www.apache.org/licenses/LICENSE-2.0). The MIT License and instructions for applying it can be found [here](https://opensource.org/licenses/MIT).
 
-2. In the Fastest VDF Implementation category, code must be produced that will solve a VDF at a given number of iterations and security difficulty on the reference hardware. The [repeated squarings VDF](https://eprint.iacr.org/2018/623.pdf) should be used, but we do not require computation of a proof, and only the speed of computation of the output will be judged. The VDF should be computed in the classgroup setting, and should output the same as our sample code above (see classgroup.py for naive implementation of classgroups). The number of iterations and security difficulty will be provided at least 2 months before the end of the contest, and will be announced on the reddit and the keybase channel.
+2. In the Fastest VDF Implementation category, code must be produced that will solve a VDF at a given number of iterations and security difficulty on the reference hardware. The [repeated squarings VDF](https://eprint.iacr.org/2018/623.pdf) should be used, but we do not require computation of a proof, and only the speed of computation of the output will be judged. The VDF should be computed in the class group setting, and should output the same as our sample code above (see classgroup.py for naive implementation of class groups). The number of iterations and security difficulty will be provided at least 2 months before the end of the contest, and will be announced on the reddit and the keybase channel.
 
 3. In the Best Discriminant Break category, the judging criteria is the file which gives the best number output from judge_entry.py. The entry needs to have three values each specifying which of our allowed discriminants it's on, and giving an element of the group and its order for each. The smallest of the three discriminants is the quality, and the greatest quality entry wins. The discriminants now are ones which have a four-byte challenge to create_discriminant().
 
@@ -64,18 +64,45 @@ Check out the command-line tools:
 
     $ pot -h
 
-Generate a proof of time.
+Generate a wesolowski proof of time.
 
     $ pot deadbeef 1000
 
-Generate a small proof of time.
+Generate an n-wesolowski proof of time, with verbose logging.
 
-    $ pot -s deadbeef 1000
+    $ pot -t n-wesolowski --depth 2 deadbeef --verbose 1000
 
-Verify a proof of time.
+Verify an n-wesolowski proof of time.
 
-    $ pot deadbeef 1000 <proof>
+    $ pot -t n-wesolowski deadbeef 1000 <proof>
 
 To see some benchmarks, run
 
     $ python3 tests/test_classgroup_vdf.py
+
+## Benchmarks
+
+Some sample benchmarks on dual core 3.5GHz i7. For the first part of the competition, the relevant benchmarks are the class group squaring times.
+
+```
+Classgroup 1024 bit multiply                                                     0.35 ms
+Classgroup 1024 bit square                                                       0.34 ms
+Classgroup 2048 bit multiply                                                     0.89 ms
+Classgroup 2048 bit square                                                       0.83 ms
+Generate 1024 bit discriminant                                                   137.77 ms
+Generate 2048 bit discriminant                                                   2002.01 ms
+VDF 10000 iterations, 512bit classgroup                                          1675.53 ms
+VDF 10000 iterations, 1024bit classgroup                                         3551.69 ms
+VDF 10000 iterations, 2048bit classgroup                                         9170.43 ms
+VDF 10000 iterations, 2048bit RSA modulus                                        118.07 ms
+VDF 10000 iterations, 4096bit RSA modulus                                        365.49 ms
+Wesolowski  512b class group, 10000 iterations, proof                            328.01 ms
+    - Percentage of VDF time: 20.52565707133917 %
+Wesolowski 512b class group, 10000 iterations, verification                      61.03 ms
+n-wesolowski depth 2 512b class group, 10000 iterations, proof                   1701.29 ms
+    - Percentage of VDF time: 4.160925874896669 %
+n-wesolowski depth 2 512b class group, 10000 iterations, verification            176.02 ms
+Pietrzak  512b class group, 10000 iterations, proof                              400.83 ms
+    - Percentage of VDF time: 25.347661188369152 %
+Pietrzak 512b class group, 10000 iterations, verification                        486.11 ms
+```
