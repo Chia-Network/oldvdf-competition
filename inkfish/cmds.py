@@ -20,6 +20,7 @@ def create_pot_parser():
                     'Verfiable Delay Function (VDF)',
     )
     parser.add_argument("-t", "--type", default="wesolowski",
+                        choices=["wesolowski", "n-wesolowski", "pietrzak"],
                         help="the type of proof, wesolowski, n-wesolowski, or pietrzak")
     parser.add_argument("-l", "--length", type=int, default=2048,
                         help="the number of bits of the discriminant")
@@ -60,9 +61,6 @@ def pot(args=sys.argv):
         elif args.type == "pietrzak":
             ok = check_proof_of_time_pietrzak(
                 discriminant, x, args.proof, args.iterations, args.length)
-        else:
-            print("Invalid type, use wesolowski, n-wesolowski, or pietrzak")
-            return -1
         if ok:
             print("Proof is valid")
         else:
@@ -79,9 +77,6 @@ def pot(args=sys.argv):
         elif args.type == "pietrzak":
             result, proof = create_proof_of_time_pietrzak(
                 discriminant, x, args.iterations, args.length)
-        else:
-            print("Invalid type, use wesolowski, n-wesolowski, or pietrzak")
-            return -1
         if args.verbose:
             print("Finished in ", round(((time.time() * 1000) - start_t), 2), "ms")
         hex_result = binascii.hexlify(result).decode("utf8")

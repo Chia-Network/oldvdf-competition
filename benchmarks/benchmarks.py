@@ -37,14 +37,14 @@ def bench_classgroup():
         g = pow(g, 2)
     g2 = pow(g, 2)
     start_bench()
-    for _ in range(0, 1000):
+    for _ in range(0, 10000):
         g2 = g2.multiply(g)
-    end_bench("Classgroup 1024 bit multiply", 1000)
+    end_bench("Classgroup 1024 bit multiply", 10000)
 
     start_bench()
-    for _ in range(0, 1000):
+    for _ in range(0, 10000):
         g2 = g2.square()
-    end_bench("Classgroup 1024 bit square", 1000)
+    end_bench("Classgroup 1024 bit square", 10000)
 
     D = create_discriminant(b"seed", 2048)
     g = ClassGroup.from_ab_discriminant(2, 1, D)
@@ -54,14 +54,14 @@ def bench_classgroup():
     g2 = pow(g, 2)
 
     start_bench()
-    for _ in range(0, 1000):
+    for _ in range(0, 10000):
         g2 = g2.multiply(g)
-    end_bench("Classgroup 2048 bit multiply", 1000)
+    end_bench("Classgroup 2048 bit multiply", 10000)
 
     start_bench()
-    for _ in range(0, 1000):
+    for _ in range(0, 10000):
         g2 = g2.square()
-    end_bench("Classgroup 2048 bit square", 1000)
+    end_bench("Classgroup 2048 bit square", 10000)
 
 
 def bench_discriminant_generation():
@@ -89,16 +89,16 @@ def bench_vdf_iterations():
     g = ClassGroup.from_ab_discriminant(2, 1, D)
 
     start_bench()
-    for _ in range(10):
+    for _ in range(2):
         iterate_squarings(g, [10000])
-    end_bench("VDF 10000 iterations, 1024bit classgroup", 10)
+    end_bench("VDF 10000 iterations, 1024bit classgroup", 2)
 
     D = create_discriminant(b"seed", 2048)
     g = ClassGroup.from_ab_discriminant(2, 1, D)
     start_bench()
-    for _ in range(10):
+    for _ in range(2):
         iterate_squarings(g, [10000])
-    end_bench("VDF 10000 iterations, 2048bit classgroup", 10)
+    end_bench("VDF 10000 iterations, 2048bit classgroup", 2)
 
     # 2048 bit modulus
     prime = int(''.join(textwrap.dedent("""
@@ -114,9 +114,9 @@ def bench_vdf_iterations():
             "\n")))
     initial_x = int_mod_n(15619920774592561628351138998371642294622340518469892832433140464182509560910157, prime)
     start_bench()
-    for _ in range(10):
+    for _ in range(2):
         iterate_squarings(initial_x, [10000])
-    end_bench("VDF 10000 iterations, 2048bit RSA modulus", 10)
+    end_bench("VDF 10000 iterations, 2048bit RSA modulus", 2)
 
     # 4096 bit modulus
     prime = int(''.join(textwrap.dedent("""
@@ -141,9 +141,9 @@ def bench_vdf_iterations():
 
     initial_x = int_mod_n(15619920774592561628351138998371642294622340518469892832433140464182509560910157, prime)
     start_bench()
-    for _ in range(10):
+    for _ in range(2):
         iterate_squarings(initial_x, [10000])
-    end_bench("VDF 10000 iterations, 4096bit RSA modulus", 10)
+    end_bench("VDF 10000 iterations, 4096bit RSA modulus", 2)
 
 
 def bench_wesolowski():
@@ -167,7 +167,7 @@ def bench_wesolowski():
     for _ in range(5):
         proof = proof_wesolowski.generate_proof(identity, x, y, iterations, k, L, powers)
     end_bench("Wesolowski  " + str(discriminant_length) + "b class group, " + str(iterations)
-              + " iterations", 5)
+              + " iterations, proof", 5)
     proof_time = round((time.time() * time_multiplier - start_t) / 5)
     print("    - Percentage of VDF time:", (proof_time / vdf_time) * 100, "%")
 
@@ -198,7 +198,7 @@ def bench_nwesolowski():
         result, proof = create_proof_of_time_nwesolowski(discriminant, x, iterations,
                                                          discriminant_length, 2, depth=0)
     end_bench("n-wesolowski depth 2 " + str(discriminant_length) + "b class group, "
-              + str(iterations) + " iterations", 20)
+              + str(iterations) + " iterations, proof", 20)
     proof_time = round((time.time() * time_multiplier - start_t) / 20)
     print("    - Percentage of VDF time:", (((proof_time - vdf_time) / vdf_time) * 100), "%")
 
@@ -230,7 +230,7 @@ def bench_pietrzak():
         proof = proof_pietrzak.generate_proof(x, iterations, delta, y, powers,
                                               identity, generate_r_value, discriminant_length)
     end_bench("Pietrzak  " + str(discriminant_length) + "b class group, " + str(iterations)
-              + " iterations", 10)
+              + " iterations, proof", 10)
     proof_time = round((time.time() * time_multiplier - start_t) / 10)
     print("    - Percentage of VDF time:", (proof_time / vdf_time) * 100, "%")
 

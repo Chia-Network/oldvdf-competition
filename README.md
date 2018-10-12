@@ -79,3 +79,30 @@ Verify an n-wesolowski proof of time.
 To see some benchmarks, run
 
     $ python3 tests/test_classgroup_vdf.py
+
+## Benchmarks
+
+Some sample benchmarks on dual core 3.5GHz i7. For the first part of the competition, the relevant benchmarks are the class group squaring times.
+
+```
+Classgroup 1024 bit multiply                                                     0.35 ms
+Classgroup 1024 bit square                                                       0.34 ms
+Classgroup 2048 bit multiply                                                     0.89 ms
+Classgroup 2048 bit square                                                       0.83 ms
+Generate 1024 bit discriminant                                                   137.77 ms
+Generate 2048 bit discriminant                                                   2002.01 ms
+VDF 10000 iterations, 512bit classgroup                                          1675.53 ms
+VDF 10000 iterations, 1024bit classgroup                                         3551.69 ms
+VDF 10000 iterations, 2048bit classgroup                                         9170.43 ms
+VDF 10000 iterations, 2048bit RSA modulus                                        118.07 ms
+VDF 10000 iterations, 4096bit RSA modulus                                        365.49 ms
+Wesolowski  512b class group, 10000 iterations, proof                            328.01 ms
+    - Percentage of VDF time: 20.52565707133917 %
+Wesolowski 512b class group, 10000 iterations, verification                      61.03 ms
+n-wesolowski depth 2 512b class group, 10000 iterations, proof                   1701.29 ms
+    - Percentage of VDF time: 4.160925874896669 %
+n-wesolowski depth 2 512b class group, 10000 iterations, verification            176.02 ms
+Pietrzak  512b class group, 10000 iterations, proof                              400.83 ms
+    - Percentage of VDF time: 25.347661188369152 %
+Pietrzak 512b class group, 10000 iterations, verification                        486.11 ms
+```
