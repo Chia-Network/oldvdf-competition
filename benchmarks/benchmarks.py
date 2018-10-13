@@ -31,6 +31,21 @@ def end_bench(name, iterations):
 
 
 def bench_classgroup():
+    D = create_discriminant(b"seed", 512)
+    g = ClassGroup.from_ab_discriminant(2, 1, D)
+    while g[0].bit_length() < g[2].bit_length() or g[0].bit_length() < g[2].bit_length():
+        g = pow(g, 2)
+    g2 = pow(g, 2)
+    start_bench()
+    for _ in range(0, 10000):
+        g2 = g2.multiply(g)
+    end_bench("Classgroup 512 bit multiply", 10000)
+
+    start_bench()
+    for _ in range(0, 10000):
+        g2 = g2.square()
+    end_bench("Classgroup 512 bit square", 10000)
+
     D = create_discriminant(b"seed", 1024)
     g = ClassGroup.from_ab_discriminant(2, 1, D)
     while g[0].bit_length() < g[2].bit_length() or g[0].bit_length() < g[2].bit_length():
@@ -66,14 +81,19 @@ def bench_classgroup():
 
 def bench_discriminant_generation():
     start_bench()
-    for i in range(10):
-        create_discriminant(i.to_bytes(32, "big"), 1024)
-    end_bench("Generate 1024 bit discriminant", 10)
+    for i in range(100):
+        create_discriminant(i.to_bytes(32, "big"), 512)
+    end_bench("Generate 512 bit discriminant", 100)
 
     start_bench()
-    for i in range(10):
+    for i in range(100):
+        create_discriminant(i.to_bytes(32, "big"), 1024)
+    end_bench("Generate 1024 bit discriminant", 100)
+
+    start_bench()
+    for i in range(100):
         create_discriminant(i.to_bytes(32, "big"), 2048)
-    end_bench("Generate 2048 bit discriminant", 10)
+    end_bench("Generate 2048 bit discriminant", 100)
 
 
 def bench_vdf_iterations():
