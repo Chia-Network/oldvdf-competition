@@ -8,7 +8,7 @@ The verifiable delay function used is the iterated squarings / RSA timelock cons
 
 Furthermore, there are two proof approaches implemented here
 1. The [first one](https://eprint.iacr.org/2018/627.pdf) by Krzysztof Pietrzak, that is fast to create, but large and slow to verify.
-2. The [second one](https://eprint.iacr.org/2018/623.pdf) by Benjamin Wesolowski which is slower to create (but parallelizable), but small, and quick to verify.
+2. The [second one](https://eprint.iacr.org/2018/623.pdf) by Benjamin Wesolowski which is slower to create (but parallelizable), but small, and quick to verify. There is also a variation of wesolowski called n-wesolowski, that allows computing the proof faster, with some added parallelism, proof size, and verification time.
 
 Both approaches are summarized in [this survey paper](https://eprint.iacr.org/2018/712.pdf) by Boneh, Bünz, and Fisch.
 
@@ -85,24 +85,27 @@ To see some benchmarks, run
 Some sample benchmarks on dual core 3.5GHz i7. For the first part of the competition, the relevant benchmarks are the class group squaring times.
 
 ```
-Classgroup 1024 bit multiply                                                     0.35 ms
-Classgroup 1024 bit square                                                       0.34 ms
-Classgroup 2048 bit multiply                                                     0.89 ms
-Classgroup 2048 bit square                                                       0.83 ms
-Generate 1024 bit discriminant                                                   137.77 ms
-Generate 2048 bit discriminant                                                   2002.01 ms
-VDF 10000 iterations, 512bit classgroup                                          1675.53 ms
-VDF 10000 iterations, 1024bit classgroup                                         3551.69 ms
-VDF 10000 iterations, 2048bit classgroup                                         9170.43 ms
-VDF 10000 iterations, 2048bit RSA modulus                                        118.07 ms
-VDF 10000 iterations, 4096bit RSA modulus                                        365.49 ms
-Wesolowski  512b class group, 10000 iterations, proof                            328.01 ms
-    - Percentage of VDF time: 20.52565707133917 %
-Wesolowski 512b class group, 10000 iterations, verification                      61.03 ms
-n-wesolowski depth 2 512b class group, 10000 iterations, proof                   1701.29 ms
-    - Percentage of VDF time: 4.160925874896669 %
-n-wesolowski depth 2 512b class group, 10000 iterations, verification            176.02 ms
-Pietrzak  512b class group, 10000 iterations, proof                              400.83 ms
-    - Percentage of VDF time: 25.347661188369152 %
-Pietrzak 512b class group, 10000 iterations, verification                        486.11 ms
+Classgroup 512 bit multiply                                                      0.16 ms
+Classgroup 512 bit square                                                        0.17 ms
+Classgroup 1024 bit multiply                                                     0.34 ms
+Classgroup 1024 bit square                                                       0.35 ms
+Classgroup 2048 bit multiply                                                     0.83 ms
+Classgroup 2048 bit square                                                       0.82 ms
+Generate 512 bit discriminant                                                    17.56 ms
+Generate 1024 bit discriminant                                                   28.33 ms
+Generate 2048 bit discriminant                                                   216.82 ms
+VDF 10000 iterations, 512bit classgroup                                          1576.67 ms
+VDF 10000 iterations, 1024bit classgroup                                         3383.61 ms
+VDF 10000 iterations, 2048bit classgroup                                         8320.66 ms
+VDF 10000 iterations, 2048bit RSA modulus                                        115.71 ms
+VDF 10000 iterations, 4096bit RSA modulus                                        369.17 ms
+Wesolowski  512b class group, 10000 iterations, proof                            287.43 ms
+    - Percentage of VDF time: 18.2453909726637 %
+Wesolowski 512b class group, 10000 iterations, verification                      62.54 ms
+n-wesolowski depth 2 512b class group, 10000 iterations, proof                   1630.58 ms
+    - Percentage of VDF time: 3.707000699434091 %
+n-wesolowski depth 2 512b class group, 10000 iterations, verification            172.94 ms
+Pietrzak  512b class group, 10000 iterations, proof                              382.78 ms
+    - Percentage of VDF time: 24.379376193507323 %
+Pietrzak 512b class group, 10000 iterations, verification                        434.43 ms
 ```
