@@ -1,6 +1,6 @@
 ## Sample submission
 
-This is a sample submission to the VDF contest, which includes source code with a classgroup implementation, and a dependency and program script.
+This is a sample submission to the VDF contest, which includes source code with a classgroup implementation, and a dependency and program script, and the required license/forms.
 
 The dependency.sh script is run by the server to install any dependencies that are necessary to complile and run the code. For example, here we are installing the GMP library as a dependency.
 
