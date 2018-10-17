@@ -33,7 +33,7 @@ def end_bench(name, iterations):
 def bench_classgroup():
     D = create_discriminant(b"seed", 512)
     g = ClassGroup.from_ab_discriminant(2, 1, D)
-    while g[0].bit_length() < g[2].bit_length() or g[0].bit_length() < g[2].bit_length():
+    while g[0].bit_length() < g[2].bit_length() or g[1].bit_length() < g[2].bit_length():
         g = pow(g, 2)
     g2 = pow(g, 2)
     start_bench()
@@ -48,7 +48,7 @@ def bench_classgroup():
 
     D = create_discriminant(b"seed", 1024)
     g = ClassGroup.from_ab_discriminant(2, 1, D)
-    while g[0].bit_length() < g[2].bit_length() or g[0].bit_length() < g[2].bit_length():
+    while g[0].bit_length() < g[2].bit_length() or g[1].bit_length() < g[2].bit_length():
         g = pow(g, 2)
     g2 = pow(g, 2)
     start_bench()
@@ -63,7 +63,7 @@ def bench_classgroup():
 
     D = create_discriminant(b"seed", 2048)
     g = ClassGroup.from_ab_discriminant(2, 1, D)
-    while g[0].bit_length() < g[2].bit_length() or g[0].bit_length() < g[2].bit_length():
+    while g[0].bit_length() < g[2].bit_length() or g[1].bit_length() < g[2].bit_length():
         g = pow(g, 2)
 
     g2 = pow(g, 2)
