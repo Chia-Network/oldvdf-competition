@@ -2,7 +2,7 @@
 
 In an attempt to create a secure, open and decentralized consensus algorithm, Chia is hosting a 3 month long competition, with a total of around $100,000 in prizes, for the implementation of fast and secure verifiable delay functions using class groups.
 
-This is an in-development version of the Chia Network proof-of-time verifiable delay function "inkfish". Below, you can also find a summary of the rules, a link to the rules and disclosures, relevant  research papers.
+This is an in-development version of the Chia Network proof-of-time verifiable delay function "inkfish". Below, you can also find a summary of the rules, a link to the rules and disclosures, relevant research papers.
 
 The verifiable delay function used is the iterated squarings / RSA timelock construction. The code implements this verifiable delay function using class groups.
 
@@ -10,11 +10,12 @@ Furthermore, there are two proof approaches implemented here
 1. The [first one](https://eprint.iacr.org/2018/627.pdf) by Krzysztof Pietrzak, that is fast to create, but large and slow to verify.
 2. The [second one](https://eprint.iacr.org/2018/623.pdf) by Benjamin Wesolowski which is slower to create (but parallelizable), but small, and quick to verify. There is also a variation of wesolowski called n-wesolowski, that allows computing the proof faster, with some added parallelism, proof size, and verification time.
 
-Both approaches are summarized in [this survey paper](https://eprint.iacr.org/2018/712.pdf) by Boneh, Bünz, and Fisch.
+Both approaches are summarized in [this survey paper](https://eprint.iacr.org/2018/712.pdf) by Boneh, Bünz, and Fisch, and we have an explanation of class groups and binary quadratic forms [here](https://www.dropbox.com/s/aqupbohwj08s1q3/bqf%20%281%29.pdf?dl=0).
 
-We have an explanation of class groups and binary quadratic forms [here](https://www.dropbox.com/s/aqupbohwj08s1q3/bqf%20%281%29.pdf?dl=0).
+A sample submission with a C++ implementation can be found [here](https://github.com/Chia-Network/vdf-competition/tree/master/sample-entry-1).
 
 Want to learn more? Join [Chia's public Keybase group](https://keybase.io/team/chia_network.public) or read Chia's [reddit](https://www.reddit.com/r/chia_vdf).
+
 
 ---
 ## ENTRY FORM
@@ -78,7 +79,7 @@ Verify an n-wesolowski proof of time.
 
 To see some benchmarks, run
 
-    $ python3 tests/test_classgroup_vdf.py
+    $ python3 benchmarks/benchmarks.py
 
 ## Benchmarks
 
@@ -108,4 +109,9 @@ n-wesolowski depth 2 512b class group, 10000 iterations, verification           
 Pietrzak  512b class group, 10000 iterations, proof                              382.78 ms
     - Percentage of VDF time: 24.379376193507323 %
 Pietrzak 512b class group, 10000 iterations, verification                        434.43 ms
+```
+
+```
+C Classgroup 2048 bit multiply                                                   0.09 ms
+C Classgroup 2048 bit square                                                     0.075 ms
 ```
