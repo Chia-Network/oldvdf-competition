@@ -26,14 +26,14 @@ struct form {
     mpz_t c;
 
     mpz_t d; // discriminant
-};
+ };
 
 ostream& operator<<(ostream& os, const form& f) {
     return os << "a: " <<  f.a << endl << "b: " << f.b << endl << "c: " << f.c << endl;
 }
 
-mpz_t negative_a, r, denom, old_b, ra, s, x, old_a, g, d, e, q, h, w, j, t, u, a,
-      b, m, k, l, mu, v, sigma, lambda;
+mpz_t negative_a, r, denom, old_b, ra, s, x, old_a, g, d, e, q, w, u, a,
+      b, m, k, mu, v, sigma, lambda, h, t, l, j;
 form f3;
 
 inline void normalize(form& f) {
@@ -46,19 +46,16 @@ inline void normalize(form& f) {
     // a = a
     // b = b + 2ra
     // c = ar^2 + br + c
-    mpz_set(r, f.a);
-    mpz_sub(r, r, f.b);
+    mpz_sub(r, f.a, f.b);
 
-    mpz_set(denom, f.a);
-    mpz_mul_ui(denom, denom, 2);
+    mpz_mul_ui(denom, f.a, 2);
 
     // r = (a-b) / 2a
     mpz_fdiv_q(r, r, denom);
 
     mpz_set(old_b, f.b);
 
-    mpz_set(ra, r);
-    mpz_mul(ra, ra, f.a);
+    mpz_mul(ra, r, f.a);
     mpz_add(f.b, f.b, ra);
     mpz_add(f.b, f.b, ra);
 
@@ -131,12 +128,6 @@ inline form generator_for_discriminant(mpz_t* d) {
     return x;
 }
 
-// Takes the gcd of three numbers
-inline void three_gcd(mpz_t& ret, mpz_t& a, mpz_t& b, mpz_t& c) {
-    mpz_gcd(ret, a, b);
-    mpz_gcd(ret, ret, c);
-}
-
 // Returns mu and v, solving for x:  ax = b mod m
 // such that x = u + vn (n are all integers). Assumes that mu and v are initialized.
 // Returns 0 on success, -1 on failure
@@ -158,6 +149,21 @@ inline int solve_linear_congruence(mpz_t& mu, mpz_t& v, mpz_t& a, mpz_t& b, mpz_
 
     mpz_fdiv_q(v, m, g);
     return 0;
+}
+
+// Faster version without check, and without returning v
+inline int solve_linear_congruence(mpz_t& mu, mpz_t& a, mpz_t& b, mpz_t& m) {
+    mpz_gcdext(g, d, e, a, m);
+    mpz_fdiv_q(q, b, g);
+    mpz_mul(mu, q, d);
+    mpz_mod(mu, mu, m);
+    return 0;
+}
+
+// Takes the gcd of three numbers
+inline void three_gcd(mpz_t& ret, mpz_t& a, mpz_t& b, mpz_t& c) {
+    mpz_gcd(ret, a, b);
+    mpz_gcd(ret, ret, c);
 }
 
 inline form* multiply(form &f1, form &f2) {
@@ -267,17 +273,43 @@ inline form* multiply(form &f1, form &f2) {
     return &f3;
 }
 
+inline form* square(form &f1) {
+    int ret = solve_linear_congruence(mu, f1.b, f1.c, f1.a);
+    assert(ret == 0);
+    mpz_neg(a, mu);
+
+    mpz_mul(m, f1.b, mu);
+    mpz_sub(m, m, f1.c);
+    mpz_fdiv_q(m, m, f1.a);
+
+    // New a
+    mpz_set(old_a, f1.a);
+    mpz_mul(f3.a, f1.a, f1.a);
+
+    // New b
+    mpz_mul(a, mu, old_a);
+    mpz_mul_ui(a, a, 2);
+    mpz_sub(f3.b, f1.b, a);
+
+    // New c
+    mpz_mul(f3.c, mu, mu);
+    mpz_sub(f3.c, f3.c, m);
+    mpz_set(f3.d, f1.d);
+    reduce(f3);
+    return &f3;
+}
+
 // Performs the VDF squaring iterations
 inline form repeated_square(form *f, uint64_t iterations) {
     for (uint64_t i=0; i < iterations; i++) {
-        f = multiply(*f, *f);
+        f = square(*f);
     }
     return *f;
 }
 
 int main(int argc, char* argv[]) {
-    mpz_inits(negative_a, r, denom, old_a, old_b, ra, s, x, g, d, e, q, h, w,
-              t, u, a, b, k, l, mu, v, sigma, lambda, f3.a, f3.b, f3.c, f3.d,
+    mpz_inits(negative_a, r, denom, old_a, old_b, ra, s, x, g, d, e, q, w, m,
+              u, a, b, k, mu, v, sigma, lambda, f3.a, f3.b, f3.c, f3.d,
               NULL);
 
     mpz_t discriminant;
