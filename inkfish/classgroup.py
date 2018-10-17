@@ -85,7 +85,7 @@ class ClassGroup(tuple):
                     items_prod = a
                 else:
                     items_prod = items_prod * a
-            a *= a
+            a = a.square()
         if items_prod:
             a = a * items_prod
         return a.reduced()

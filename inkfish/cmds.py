@@ -47,6 +47,7 @@ def pot(args=sys.argv):
         print("discriminant: %s" % discriminant)
         print("discriminant size: %s" % args.length)
 
+    # Generator element is created as a=2, b=1.
     x = ClassGroup.from_ab_discriminant(2, 1, discriminant)
     if args.verbose:
         print("x: %s" % str(x))
