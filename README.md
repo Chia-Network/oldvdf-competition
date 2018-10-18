@@ -10,7 +10,7 @@ Furthermore, there are two proof approaches implemented here
 1. The [first one](https://eprint.iacr.org/2018/627.pdf) by Krzysztof Pietrzak, that is fast to create, but large and slow to verify.
 2. The [second one](https://eprint.iacr.org/2018/623.pdf) by Benjamin Wesolowski which is slower to create (but parallelizable), but small, and quick to verify. There is also a variation of wesolowski called n-wesolowski, that allows computing the proof faster, with some added parallelism, proof size, and verification time.
 
-Both approaches are summarized in [this survey paper](https://eprint.iacr.org/2018/712.pdf) by Boneh, Bünz, and Fisch, and we have an explanation of class groups and binary quadratic forms [here](https://www.dropbox.com/s/aqupbohwj08s1q3/bqf%20%281%29.pdf?dl=0).
+Both approaches are summarized in [this survey paper](https://eprint.iacr.org/2018/712.pdf) by Boneh, Bünz, and Fisch, and we have an explanation of class groups and binary quadratic forms [here](https://github.com/Chia-Network/vdf-competition/tree/master/classgroups.pdf).
 
 A sample submission with a C++ implementation can be found [here](https://github.com/Chia-Network/vdf-competition/tree/master/sample-entry-1).
 

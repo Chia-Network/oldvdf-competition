@@ -273,10 +273,20 @@ inline form* multiply(form &f1, form &f2) {
     return &f3;
 }
 
+/**
+ * This algorithm is the same as the composition/multiply algorithm,
+ * but simplified to where both inputs are equal (squaring). It also
+ * assumes that the discriminant is a negative prime. Algorithm:
+ *
+ * 1. solve for mu: b(mu) = c mod a
+ * 2.  A = a^2
+ *     B = B - 2a * mu
+ *     C = mu^2 - (b * mu - c)/a
+ * 3. reduce f(A, B, C)
+ **/
 inline form* square(form &f1) {
     int ret = solve_linear_congruence(mu, f1.b, f1.c, f1.a);
     assert(ret == 0);
-    mpz_neg(a, mu);
 
     mpz_mul(m, f1.b, mu);
     mpz_sub(m, m, f1.c);
