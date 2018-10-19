@@ -20,7 +20,7 @@ Want to learn more? Join [Chia's public Keybase group](https://keybase.io/team/c
 ---
 ## ENTRY FORM
 
-By providing your legal first and last names, street address, city, zip code, daytime and home phone number, email address, and agreement to the [VDF Contest Challenge Rules and Disclosures agreement](https://www.dropbox.com/s/46b92qfvrxw8jzp/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%284%29.pdf?dl=0), and  along with the source code and documentation meeting the Entry Specifications described in the VDF Contest Challenge Rules and Disclosures agreement above (specifically the “Technical Submission”) to [Chia's public Keybase group](https://keybase.io/team/chia_network.public). The judges will communicate with your team using a keybase shared git repo.
+By providing your legal first and last names, street address, city, zip code, daytime and home phone number, email address, and agreement to the [VDF Contest Challenge Rules and Disclosures agreement](https://www.dropbox.com/s/t6vw7agq92nmxlw/bqf%20%282%29.pdf?dl=0), and  along with the source code and documentation meeting the Entry Specifications described in the VDF Contest Challenge Rules and Disclosures agreement above (specifically the “Technical Submission”) to [Chia's public Keybase group](https://keybase.io/team/chia_network.public). The judges will communicate with your team using a keybase shared git repo.
 
 The Entry Form and Technical Submission together are considered the entry (“Entry”). An Entry is not complete and will not be considered if either portion is missing.
 
@@ -29,9 +29,9 @@ An Entry may be submitted by a team of individuals working collaboratively (a �
 
 1. Completed version of the [Entry Form](https://www.dropbox.com/s/odsglm1eu9z6g8v/CHIA%20NETWORK%20APPLICATION%20FORM%204812-8893-1439%20v.1.pdf?dl=0).
 
-2. Signed version of the [VDF Contest Challenge Rules and Disclosures agreement](https://www.dropbox.com/s/46b92qfvrxw8jzp/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%284%29.pdf?dl=0)
+2. Signed version of the [VDF Contest Challenge Rules and Disclosures agreement](https://www.dropbox.com/s/t6vw7agq92nmxlw/bqf%20%282%29.pdf?dl=0)
 
-3. Source code and documentation meeting the Entry Specifications described in the [VDF Contest Challenge Rules and Disclosures agreement](https://www.dropbox.com/s/46b92qfvrxw8jzp/Chia%20Network%20-%20VDF%20Contest%20Rules%20and%20Disclosures%20%284%29.pdf?dl=0) specific to the “Technical Submission” guidelines (outlined below).
+3. Source code and documentation meeting the Entry Specifications described in the [VDF Contest Challenge Rules and Disclosures agreement](https://www.dropbox.com/s/t6vw7agq92nmxlw/bqf%20%282%29.pdf?dl=0) specific to the “Technical Submission” guidelines (outlined below).
 
 ### Technical Specifications
 1. All source code and documentation in an Entry must be made and submitted pursuant to the terms of the Apache or MIT License. The Apache Licence and instructions for applying it can be found [here](https://www.apache.org/licenses/LICENSE-2.0). The MIT License and instructions for applying it can be found [here](https://opensource.org/licenses/MIT).
