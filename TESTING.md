@@ -8,7 +8,7 @@ Run all tests with:
 
     $ py.test tests
 
-Use -s to view output from print statments (normally surpressed by py.test)
+Use -s to view output from print statements (normally suppressed by py.test)
 
     $ py.test -s tests
 
