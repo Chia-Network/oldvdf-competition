@@ -28,8 +28,9 @@ def create_discriminant(seed, length=2048):
     Generate a probable prime p where p % 8 == 7.
     Return -p.
     """
-    entropy = entropy_from_seed(seed, (length >> 3) + 2)
-    n = (int.from_bytes(entropy[:-2], 'big') >> ((len(entropy) - 2) * 8 - length)) | (1 << (length - 1))
+    extra = (length - 1) % 8
+    entropy = entropy_from_seed(seed, ((length-1) >> 3) + (2 if extra == 0 else 3))
+    n = (int.from_bytes(entropy[:-2], 'big') >> (8 - extra)) | (1 << (length - 1))
     n -= n % m
     n += residues[int.from_bytes(entropy[-2:], 'big') % len(residues)]
 
