@@ -16,7 +16,7 @@ def judge_entry(mystr):
         length = int(vals[1])
         assert length < 5000
         assert all(len(x) < length for x in vals[2:])
-        assert len(vals[0]) == 8
+        assert len(vals[0]) <= 32
         d = create_discriminant(a2b_hex(vals[0]), length)
         g = ClassGroup(int(vals[2]), int(vals[3]), int(vals[4]))
         assert g.discriminant() == d
