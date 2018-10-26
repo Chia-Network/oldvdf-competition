@@ -3,6 +3,7 @@ from binascii import a2b_hex
 from inkfish.create_discriminant import create_discriminant
 from inkfish.classgroup import ClassGroup
 
+
 def judge_entry(mystr):
     assert len(mystr) < 100000
     lines = mystr.strip().split(b'\n')
@@ -26,6 +27,7 @@ def judge_entry(mystr):
         assert d not in ds
         ds.add(d)
     return -max(ds)
+
 
 if __name__ == '__main__':
     from sys import argv

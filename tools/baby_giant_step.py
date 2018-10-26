@@ -1,4 +1,4 @@
-from itertools import *
+from itertools import accumulate, repeat
 from inkfish.classgroup import ClassGroup
 from inkfish.create_discriminant import create_discriminant
 from binascii import b2a_hex
@@ -15,9 +15,9 @@ def compute_order(g: ClassGroup) -> int:
         gSqrt = (g ** quadRoot).normalized()
         bigStep = gSqrt
         result = next(filter(lambda giant: giant[1] in babyset,
-                accumulate(repeat((1, bigStep), size),
-                lambda old, new: (old[0] + new[0], old[1] * new[1]))), None)
-        if result != None:
+                      accumulate(repeat((1, bigStep), size),
+                      lambda old, new: (old[0] + new[0], old[1] * new[1]))), None)
+        if result is not None:
             order = (result[0] * quadRoot - babylist.index(result[1]) - 1)
             return order
         size *= 2
@@ -34,6 +34,7 @@ def print_entry(length):
 
         c = (1 - d) // (4 * 2)
         print('%s %i %i %i %i %i' % (b2a_hex(seed).decode('latin-1'), length, 2, 1, c, order))
+
 
 if __name__ == '__main__':
     from sys import argv
