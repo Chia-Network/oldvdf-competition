@@ -74,21 +74,14 @@ class ClassGroup(tuple):
         return not self.__eq__(other)
 
     def __pow__(self, n):
-        if n == 0:
-            return self.identity()
-        a = self
-        items_prod = None
-        bits = bin(n)[2:]
-        for i in range(len(bits) - 1, 0, -1):
-            if bits[i] == "1":
-                if not items_prod:
-                    items_prod = a
-                else:
-                    items_prod = items_prod * a
-            a = a.square()
-        if items_prod:
-            a = a * items_prod
-        return a.reduced()
+        x = self
+        items_prod = self.identity()
+        while n > 0:
+            if n & 1:
+                items_prod *= x
+            x = x.square()
+            n >>= 1
+        return items_prod
 
     def inverse(self):
         a, b, c = self
