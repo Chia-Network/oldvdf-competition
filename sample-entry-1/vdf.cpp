@@ -16,6 +16,7 @@ limitations under the License.
 
 #include <iostream>
 #include <gmpxx.h>
+#include <cassert>
 
 using namespace std;
 
