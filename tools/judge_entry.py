@@ -10,6 +10,7 @@ def judge_entry(mystr):
     assert len(lines) == 3
     ds = set()
     for line in lines:
+        # File format:
         # challenge(in hex) length a b c order
         vals = [x.strip() for x in line.strip().split(b' ')]
         assert len(vals) == 6
