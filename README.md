@@ -2,7 +2,7 @@
 
 In an attempt to create a secure, open and decentralized consensus algorithm, Chia is hosting a 3 month long competition, with a total of around $100,000 in prizes, for the implementation of fast and secure verifiable delay functions using class groups.
 
-This is an in-development version of the Chia Network proof-of-time verifiable delay function "inkfish". Below, you can also find a summary of the rules, a link to the rules and disclosures, relevant research papers.
+This is an in-development version of the Chia Network proof-of-time verifiable delay function "inkfish". Below, you can also find a summary of the rules, a link to the rules and disclosures, relevant research papers. Also, check out the [blog post](https://medium.com/@chia_network/chia-vdf-competition-guide-5382e1f4bd39) which explains how to participate.
 
 The verifiable delay function used is the iterated squarings / RSA timelock construction. The code implements this verifiable delay function using class groups.
 
