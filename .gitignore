@@ -4,3 +4,4 @@ env
 activate
 **/__pycache__
 .pytest*
+.idea/*
